@@ -27,6 +27,7 @@ class Song {
     song.artistName = json["artistName"].stringValue
     song.albumName = json["collectionName"].stringValue
     song.songName = json["trackName"].stringValue
+    song.imageUrl = json["artworkUrl100"].URL
 
     return song
   }
@@ -36,7 +37,6 @@ class Song {
     for songDictionary in json.arrayValue {
       let song = Song.songByJSON(songDictionary)
       songs.append(song)
-      println(song.songInformation())
     }
     return songs
   }

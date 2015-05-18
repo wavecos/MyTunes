@@ -10,7 +10,13 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
+protocol MyTunesAPIDelegate {
+  func songsReceived(songs : [Song])
+}
+
 class MyTunesAPIClient {
+  
+  var delegate : MyTunesAPIDelegate?
   
   func getSongs() {
   
@@ -20,17 +26,13 @@ class MyTunesAPIClient {
         if error == nil {
           if jsonData != nil  {
             let json = JSON(jsonData!)
-            
-            let count = json["resultCount"].intValue
             let songs = Song.songsByJSON(json["results"])
             
-            println("el numero de canciones es \(count)")
+            self.delegate?.songsReceived(songs)
             
           }
           
         }
-        
-        
     }
     
   }
