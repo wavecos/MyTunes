@@ -10,9 +10,16 @@ import UIKit
 
 class ViewController: UIViewController {
 
+  let myTunesAPIClient = MyTunesAPIClient()
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    println("Hola mundo")
+
+    self.myTunesAPIClient.getSongs()
+    
   }
 
   override func didReceiveMemoryWarning() {
