@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import AVFoundation
 
 class SongDetailViewController: UIViewController {
   
@@ -15,6 +16,7 @@ class SongDetailViewController: UIViewController {
   @IBOutlet weak var albumImageView: UIImageView!
   // Variables
   var song : Song?
+  var audioPlayer : AVAudioPlayer?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -25,10 +27,36 @@ class SongDetailViewController: UIViewController {
       
       self.albumImageView.sd_setImageWithURL(song.imageUrl, placeholderImage: nil)
       
+      
+      playSong(song.previewUrl)
+      
+      
+      
     }
     
     
   }
+  
+  func playSong(songURL : NSURL) {
+    
+    let songData = NSData(contentsOfURL: songURL)
+    
+    var error : NSError?
+    
+    self.audioPlayer = AVAudioPlayer(data: songData, error: &error)
+    
+    if let audioPlayer = self.audioPlayer {
+      audioPlayer.numberOfLoops = 0
+      
+      audioPlayer.volume = 1
+      
+      audioPlayer.prepareToPlay()
+      
+      audioPlayer.play()
+    }
+  }
+  
+  
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()

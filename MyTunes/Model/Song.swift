@@ -28,6 +28,7 @@ class Song {
     song.albumName = json["collectionName"].stringValue
     song.songName = json["trackName"].stringValue
     song.imageUrl = json["artworkUrl100"].URL
+    song.previewUrl = json["previewUrl"].URL
 
     return song
   }
